@@ -4,6 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 @AGENTS.md
 
+## Docs-first rule
+
+**IMPORTANT:** Before generating any code, ALWAYS first read the relevant documentation in the `docs/` folder and follow the conventions it describes. Do not write code until you have checked `docs/` for a file covering the area you are working on.
+
+- `docs/ui.md` — UI conventions (components, styling)
+
+When adding a new doc to `docs/`, list it here so it is discovered.
+
 ## Commands
 
 - `npm run dev` — start the dev server (http://localhost:3000)
