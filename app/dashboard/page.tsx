@@ -1,13 +1,10 @@
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
-
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getWorkoutsForDate } from "@/lib/workouts";
+import { getWorkoutsForDate } from "@/data/workouts";
 
 import { DatePicker } from "./date-picker";
 
@@ -24,11 +21,8 @@ function resolveDate(param: string | string[] | undefined) {
 export default async function DashboardPage({
   searchParams,
 }: PageProps<"/dashboard">) {
-  const { userId } = await auth();
-  if (!userId) redirect("/sign-in");
-
   const date = resolveDate((await searchParams).date);
-  const workouts = await getWorkoutsForDate(userId, date);
+  const workouts = await getWorkoutsForDate(date);
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-col gap-6 p-6">
