@@ -1,4 +1,4 @@
-import { PlusIcon } from "lucide-react";
+import { PencilIcon, PlusIcon } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -49,8 +49,17 @@ export default async function DashboardPage({
       ) : (
         workouts.map((workout) => (
           <Card key={workout.id}>
-            <CardHeader>
+            <CardHeader className="flex items-center justify-between gap-4">
               <CardTitle>{workout.name ?? "Workout"}</CardTitle>
+              <Button
+                variant="outline"
+                size="sm"
+                nativeButton={false}
+                render={<Link href={`/dashboard/workout/${workout.id}`} />}
+              >
+                <PencilIcon />
+                Edit
+              </Button>
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
               {workout.workoutExercises.map((we) => (

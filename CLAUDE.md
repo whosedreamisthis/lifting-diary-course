@@ -20,7 +20,7 @@ When adding a new doc to `docs/`, list it here so it is discovered.
 - `npm run dev` — start the dev server (http://localhost:3000)
 - `npm run build` / `npm start` — production build and serve
 - `npm run lint` — ESLint (flat config in `eslint.config.mjs`, uses `eslint-config-next`)
-- No test runner is configured yet.
+- `npm test` — run unit tests once with Vitest (`vitest.config.mts`; tests are co-located as `*.test.ts`)
 
 ## Architecture
 

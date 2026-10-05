@@ -1,3 +1,5 @@
+import { and, eq } from "drizzle-orm";
+
 import { db } from "@/db";
 import { workouts } from "@/db/schema";
 import { requireUserId } from "@/data/auth";
@@ -27,6 +29,30 @@ export async function getWorkoutsForDate(date: string) {
       },
     },
   });
+}
+
+export async function getWorkoutById(workoutId: number) {
+  const userId = await requireUserId();
+
+  return db.query.workouts.findFirst({
+    where: { id: workoutId, userId }, // ID AND userId, never ID alone
+  });
+}
+
+export async function updateWorkout(input: {
+  id: number;
+  name?: string;
+  date: string;
+}) {
+  const userId = await requireUserId();
+  const { start } = dayRange(input.date);
+
+  const [workout] = await db
+    .update(workouts)
+    .set({ name: input.name ?? null, startedAt: start })
+    .where(and(eq(workouts.id, input.id), eq(workouts.userId, userId)))
+    .returning();
+  return workout;
 }
 
 export async function createWorkout(input: { name?: string; date: string }) {
