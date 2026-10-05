@@ -1,3 +1,7 @@
+import { PlusIcon } from "lucide-react";
+import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -28,7 +32,16 @@ export default async function DashboardPage({
     <main className="mx-auto flex w-full max-w-3xl flex-col gap-6 p-6">
       <div className="flex items-center justify-between gap-4">
         <h1 className="text-2xl font-semibold">Dashboard</h1>
-        <DatePicker date={date} />
+        <div className="flex items-center gap-3">
+          <DatePicker date={date} />
+          <Button
+            nativeButton={false}
+            render={<Link href="/dashboard/workout/new" />}
+          >
+            <PlusIcon />
+            Create workout
+          </Button>
+        </div>
       </div>
 
       {workouts.length === 0 ? (

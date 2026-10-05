@@ -1,4 +1,5 @@
 import { db } from "@/db";
+import { workouts } from "@/db/schema";
 import { requireUserId } from "@/data/auth";
 
 // Day boundaries are UTC; "YYYY-MM-DD" maps to [00:00Z, next 00:00Z).
@@ -26,4 +27,15 @@ export async function getWorkoutsForDate(date: string) {
       },
     },
   });
+}
+
+export async function createWorkout(input: { name?: string; date: string }) {
+  const userId = await requireUserId(); // session user, never a parameter
+  const { start } = dayRange(input.date);
+
+  const [workout] = await db
+    .insert(workouts)
+    .values({ userId, name: input.name, startedAt: start })
+    .returning();
+  return workout;
 }

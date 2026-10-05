@@ -9,6 +9,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **IMPORTANT:** Before generating any code, ALWAYS first read the relevant documentation in the `docs/` folder and follow the conventions it describes. Do not write code until you have checked `docs/` for a file covering the area you are working on.
 
 - `docs/ui.md` — UI conventions (components, styling)
+- `docs/auth.md` — authentication conventions (Clerk only, route protection in `proxy.ts`, `requireUserId()`)
+- `docs/data-mutations.md` — data mutation rules (`/data` helpers with Drizzle, server actions in co-located `actions.ts`, typed params with no `FormData`, Zod validation)
 - `docs/data-fetching.md` — data fetching rules (server components only, `/data` helpers with Drizzle, per-user data access)
 
 When adding a new doc to `docs/`, list it here so it is discovered.
