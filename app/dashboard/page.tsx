@@ -9,14 +9,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getWorkoutsForDate } from "@/data/workouts";
+import { isValidDateString } from "@/lib/date-schema";
 
 import { DatePicker } from "./date-picker";
 
-const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
-
 function resolveDate(param: string | string[] | undefined) {
   const value = Array.isArray(param) ? param[0] : param;
-  if (value && DATE_PATTERN.test(value) && !isNaN(Date.parse(value))) {
+  if (value && isValidDateString(value)) {
     return value;
   }
   return new Date().toISOString().slice(0, 10);

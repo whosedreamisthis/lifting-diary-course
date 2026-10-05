@@ -5,13 +5,11 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { createWorkout } from "@/data/workouts";
+import { dateStringSchema } from "@/lib/date-schema";
 
 const createWorkoutSchema = z.object({
   name: z.string().trim().max(100).optional(),
-  date: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/)
-    .refine((value) => !isNaN(Date.parse(value))),
+  date: dateStringSchema,
 });
 
 type CreateWorkoutInput = z.infer<typeof createWorkoutSchema>;

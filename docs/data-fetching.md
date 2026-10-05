@@ -58,11 +58,12 @@ Always filter on the owning `workouts.userId` when querying these tables (via a 
 ```ts
 // data/auth.ts
 import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-// Returns the session user's ID, or throws if nobody is signed in.
+// Returns the session user's ID; sends signed-out visitors to sign-in.
 export async function requireUserId() {
   const { userId } = await auth();
-  if (!userId) throw new Error("Unauthenticated");
+  if (!userId) redirect("/sign-in");
   return userId;
 }
 ```

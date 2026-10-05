@@ -22,7 +22,7 @@
 
 Note: Next.js 16 uses `proxy.ts` (not `middleware.ts`) at the repo root. Do not add a `middleware.ts`.
 
-Clerk keys live in `.env.local` (`NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`). NEVER commit them or hard-code them.
+Clerk keys live in `.env` (git-ignored via `.env*`) (`NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`). NEVER commit them or hard-code them.
 
 ## 3. Protecting routes
 

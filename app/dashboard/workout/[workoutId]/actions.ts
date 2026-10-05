@@ -5,14 +5,12 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { updateWorkout } from "@/data/workouts";
+import { dateStringSchema } from "@/lib/date-schema";
 
 const updateWorkoutSchema = z.object({
   id: z.number().int().positive(),
   name: z.string().trim().max(100).optional(),
-  date: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/)
-    .refine((value) => !isNaN(Date.parse(value))),
+  date: dateStringSchema,
 });
 
 type UpdateWorkoutInput = z.infer<typeof updateWorkoutSchema>;
