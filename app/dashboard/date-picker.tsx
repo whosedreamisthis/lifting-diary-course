@@ -1,5 +1,6 @@
 "use client";
 
+import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -38,15 +39,15 @@ export function DatePicker({ date }: { date: string }) {
         }
       >
         <CalendarIcon />
-        {selected.toLocaleDateString(undefined, { dateStyle: "long" })}
+        {format(selected, "do MMM yyyy")}
       </PopoverTrigger>
       <PopoverContent align="start" className="w-auto p-0">
         <Calendar
           mode="single"
+          required
           selected={selected}
           defaultMonth={selected}
           onSelect={(next) => {
-            if (!next) return;
             setOpen(false);
             router.push(`/dashboard?date=${formatDate(next)}`);
           }}
